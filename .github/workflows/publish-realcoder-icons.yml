@@ -40,7 +40,7 @@ jobs:
         run: npx @vscode/vsce package --out /tmp/realcoder-icons.vsix
 
       - name: Bump patch version
-        run: npm version patch --no-git-tag-version
+        run: npm version patch --no-git-tag-version --ignore-scripts
 
       - name: Publish to the VS Code Marketplace
         run: npx @vscode/vsce publish --skip-duplicate -p "$VSCE_PAT"
