@@ -1,0 +1,237 @@
+<title>RealCoder — Theme Preview</title>
+<style>
+  :root {
+    --bg: #0D0D0D;
+    --bg-darker: #050505;
+    --bg-dark: #0A0A0A;
+    --panel: #161616;
+    --panel-2: #1E1E1E;
+    --line: #FFFFFF14;
+    --fg: #F6F6F6;
+    --comment: #74715E;
+    --pink: #F92772;
+    --green: #A7E22E;
+    --yellow: #E6DA74;
+    --cyan: #66D9EE;
+    --purple: #AE81FF;
+    --orange: #FE9720;
+    --gray: #808080;
+    --error: #FF2E5B;
+    --amber: #FFCA3A;
+    --accent: #FF3D9A;
+    --regex: #FD6E9C;
+    --mono: "JetBrains Mono", "SF Mono", "Fira Code", Menlo, Consolas, ui-monospace, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, #F927721a, transparent 60%),
+      radial-gradient(1000px 700px at 100% 110%, #66d9ee14, transparent 55%),
+      var(--bg-darker);
+    color: var(--fg);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(1.25rem, 4vw, 3.5rem);
+    display: flex;
+    justify-content: center;
+  }
+
+  .shell { width: min(960px, 100%); }
+
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.4rem;
+  }
+  .masthead h1 {
+    font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0;
+    background: linear-gradient(100deg, var(--pink), var(--green) 48%, var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .masthead .tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--comment);
+  }
+
+  /* Editor window */
+  .window {
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg);
+    border: 1px solid #ffffff12;
+    box-shadow: 0 24px 60px -20px #000000, 0 0 0 1px #ffffff08 inset;
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 0.95rem;
+    background: var(--bg-dark);
+    border-bottom: 1px solid #ffffff0d;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #F92772; }
+  .dot.y { background: #E6DA74; }
+  .dot.g { background: #A7E22E; }
+  .titlebar .file {
+    margin-left: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--gray);
+  }
+  .titlebar .file b { color: var(--fg); font-weight: 500; }
+
+  .editor {
+    display: grid;
+    grid-template-columns: 3.2rem 1fr;
+    font-family: var(--mono);
+    font-size: 0.86rem;
+    line-height: 1.75;
+    overflow-x: auto;
+  }
+  .gutter {
+    text-align: right;
+    padding: 1.1rem 0.85rem 1.35rem;
+    color: #ffffff2e;
+    user-select: none;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(90deg, #ffffff05, transparent);
+  }
+  pre.code {
+    margin: 0;
+    padding: 1.1rem 1.4rem 1.35rem 0.4rem;
+    white-space: pre;
+    tab-size: 4;
+  }
+
+  .cmt   { color: var(--comment); font-style: italic; }
+  .kw    { color: var(--pink); }
+  .type  { color: var(--cyan); font-style: italic; }
+  .fn    { color: var(--green); }
+  .str   { color: var(--yellow); }
+  .num   { color: var(--purple); }
+  .param { color: var(--orange); font-style: italic; }
+  .anno  { color: var(--amber); font-style: italic; }
+  .op    { color: var(--pink); }
+  .b1 { color: var(--pink); }
+  .b2 { color: var(--orange); }
+  .b3 { color: var(--yellow); }
+
+  .section-label {
+    margin: 1.9rem 0 0.2rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--comment);
+  }
+
+  /* Palette legend */
+  .legend {
+    margin-top: 1.6rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.55rem;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.6rem 0.7rem;
+    background: var(--panel);
+    border: 1px solid #ffffff0d;
+    border-radius: 8px;
+  }
+  .chip { width: 20px; height: 20px; border-radius: 5px; flex: none; box-shadow: 0 0 12px -2px currentColor; }
+  .swatch .meta { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+  .swatch .role { font-size: 0.72rem; color: var(--fg); font-weight: 600; }
+  .swatch .hex { font-family: var(--mono); font-size: 0.68rem; color: var(--comment); letter-spacing: 0.03em; }
+</style>
+
+<div class="shell">
+  <header class="masthead">
+    <h1>RealCoder</h1>
+    <span class="tag">Monokai · #0D0D0D · neon syntax</span>
+  </header>
+
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="file">src/main/java/&#8203;<b>Equilibrium.java</b></span>
+    </div>
+    <div class="editor">
+      <div class="gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div><pre class="code"><span class="cmt">/** Entry point */</span>
+<span class="kw">public class</span> <span class="fn">Equilibrium</span> {
+
+    <span class="kw">private static final</span> <span class="type">Logger</span> LOG <span class="op">=</span> <span class="type">LoggerFactory</span>.<span class="fn">getLogger</span>(Equilibrium.<span class="kw">class</span>);
+    <span class="kw">double</span> doubleVariable <span class="op">=</span> <span class="num">12345.67890</span>; <span class="cmt">// TODO: remove test variable</span>
+
+    <span class="anno">@Inject</span>
+    <span class="kw">public</span> <span class="fn">Equilibrium</span>(<span class="type">MainPresenter</span> <span class="param">presenter</span>) { presenter.<span class="fn">start</span>(); }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="type">String</span>[] <span class="param">args</span>) {
+        LOG.<span class="fn">info</span>(<span class="str">"Equilibrium started"</span>);
+        <span class="type">SwingUtilities</span>.<span class="fn">invokeLater</span><span class="b1">(</span><span class="b2">()</span> <span class="op">-&gt;</span> <span class="b2">{</span> <span class="fn">injectApplication</span><span class="b3">()</span>; <span class="b2">}</span><span class="b1">)</span>;
+    }
+
+    <span class="cmt">/* Inject classes */</span>
+    <span class="kw">private static void</span> <span class="fn">injectApplication</span>() {
+        <span class="type">Injector</span> injector <span class="op">=</span> <span class="type">Guice</span>.<span class="fn">createInjector</span>(<span class="kw">new</span> <span class="type">GuiceModule</span>());
+        injector.<span class="fn">getInstance</span>(Equilibrium.<span class="kw">class</span>);
+    }
+}</pre>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="swatch"><span class="chip" style="background:#F92772;color:#F92772"></span><span class="meta"><span class="role">Keyword · operator</span><span class="hex">#F92772</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#A7E22E;color:#A7E22E"></span><span class="meta"><span class="role">Function · class</span><span class="hex">#A7E22E</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#E6DA74;color:#E6DA74"></span><span class="meta"><span class="role">String</span><span class="hex">#E6DA74</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#66D9EE;color:#66D9EE"></span><span class="meta"><span class="role">Type · class ref</span><span class="hex">#66D9EE</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#AE81FF;color:#AE81FF"></span><span class="meta"><span class="role">Number · constant</span><span class="hex">#AE81FF</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#FE9720;color:#FE9720"></span><span class="meta"><span class="role">Parameter</span><span class="hex">#FE9720</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#74715E;color:#74715E"></span><span class="meta"><span class="role">Comment</span><span class="hex">#74715E</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#F6F6F6;color:#F6F6F6"></span><span class="meta"><span class="role">Foreground</span><span class="hex">#F6F6F6</span></span></div>
+  </div>
+
+  <p class="section-label">Signature &mdash; situações além do Monokai</p>
+  <div class="legend">
+    <div class="swatch"><span class="chip" style="background:#FF3D9A;color:#FF3D9A"></span><span class="meta"><span class="role">Accent UI</span><span class="hex">#FF3D9A</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#FF2E5B;color:#FF2E5B"></span><span class="meta"><span class="role">Erro · inválido</span><span class="hex">#FF2E5B</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#FFCA3A;color:#FFCA3A"></span><span class="meta"><span class="role">Warning · annotation</span><span class="hex">#FFCA3A</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#FD6E9C;color:#FD6E9C"></span><span class="meta"><span class="role">Regex</span><span class="hex">#FD6E9C</span></span></div>
+    <div class="swatch"><span class="chip" style="background:linear-gradient(90deg,#F92772,#FE9720,#E6DA74,#A7E22E,#66D9EE,#AE81FF);color:#66D9EE"></span><span class="meta"><span class="role">Brackets rainbow</span><span class="hex">6 níveis</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#AE81FF61;color:#AE81FF"></span><span class="meta"><span class="role">Seleção (tint)</span><span class="hex">#AE81FF · 38%</span></span></div>
+  </div>
+</div>

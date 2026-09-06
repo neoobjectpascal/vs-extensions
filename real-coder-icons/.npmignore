@@ -1,0 +1,5 @@
+*
+!icons/*
+!dist/types/**/*
+!dist/realcoder-icons.json
+!dist/module/index.cjs

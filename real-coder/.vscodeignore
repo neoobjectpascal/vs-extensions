@@ -1,0 +1,16 @@
+.github/**
+.vscode/**
+.claude/**
+bin/**
+docs/**
+node_modules/**
+scripts/**
+src/**
+tests/**
+.editorconfig
+.prettierrc.toml
+generate.js
+jsconfig.json
+known_issues.md
+.gitignore
+.DS_Store

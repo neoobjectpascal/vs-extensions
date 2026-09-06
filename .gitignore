@@ -1,0 +1,10 @@
+.DS_Store
+**/.DS_Store
+**/node_modules/
+**/.cache/
+**/.vscode-test/
+**/*.vsix
+**/*.tgz
+**/*.log
+**/.claude/settings.local.json
+**/docs/superpowers/

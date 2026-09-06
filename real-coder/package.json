@@ -1,0 +1,58 @@
+{
+    "name": "realcoder",
+    "version": "1.1.0",
+    "displayName": "RealCoder",
+    "description": "RealCoder: a Monokai-inspired dark theme for VS Code — pure black background and intense neon syntax colors. 🌈",
+    "publisher": "alvarobrito",
+    "author": "Álvaro Brito",
+    "license": "MIT",
+    "scripts": {
+        "build": "node ./scripts/build.js",
+        "lint": "node ./scripts/lint.js",
+        "package": "mkdir -p bin && npx @vscode/vsce package -o ./bin/realcoder.vsix",
+        "vscode:prepublish": "npm run build",
+        "vsce-publish": "npx @vscode/vsce publish"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/neoobjectpascal/vs-extensions.git",
+        "directory": "real-coder"
+    },
+    "bugs": {
+        "url": "https://github.com/neoobjectpascal/vs-extensions/issues"
+    },
+    "homepage": "https://github.com/neoobjectpascal/vs-extensions/tree/main/real-coder",
+    "engines": {
+        "vscode": "^1.13.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "keywords": [
+        "realcoder",
+        "monokai",
+        "dark",
+        "theme",
+        "color-theme",
+        "neon"
+    ],
+    "icon": "icon.png",
+    "galleryBanner": {
+        "color": "#0D0D0D",
+        "theme": "dark"
+    },
+    "contributes": {
+        "themes": [
+            {
+                "label": "RealCoder",
+                "uiTheme": "vs-dark",
+                "path": "./theme/realcoder.json"
+            }
+        ]
+    },
+    "devDependencies": {
+        "js-yaml": "^4.2.0",
+        "prettier": "^3.0.0",
+        "vsce": "^2.15.0"
+    }
+}

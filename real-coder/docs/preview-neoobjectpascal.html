@@ -1,0 +1,148 @@
+<title>RealCoder — NeoObjectPascal Preview</title>
+<style>
+  :root {
+    --bg: #0D0D0D; --bg-darker: #050505; --bg-dark: #0A0A0A;
+    --panel: #161616; --fg: #F6F6F6; --comment: #74715E;
+    --pink: #F92772; --green: #A7E22E; --yellow: #E6DA74; --cyan: #66D9EE;
+    --purple: #AE81FF; --orange: #FE9720; --gray: #808080;
+    --error: #FF2E5B; --amber: #FFCA3A; --accent: #FF3D9A; --regex: #FD6E9C;
+    --mono: "JetBrains Mono", "SF Mono", "Fira Code", Menlo, Consolas, ui-monospace, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 12% -10%, #FF3D9A1a, transparent 60%),
+      radial-gradient(1000px 700px at 100% 110%, #66d9ee14, transparent 55%),
+      var(--bg-darker);
+    color: var(--fg); font-family: var(--sans); -webkit-font-smoothing: antialiased;
+    padding: clamp(1.25rem, 4vw, 3.5rem); display: flex; justify-content: center;
+  }
+  .shell { width: min(1000px, 100%); }
+  .masthead { display: flex; align-items: baseline; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+  .masthead h1 {
+    font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; margin: 0;
+    background: linear-gradient(100deg, var(--accent), var(--purple) 40%, var(--cyan));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .masthead .tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--comment); }
+  .window { border-radius: 12px; overflow: hidden; background: var(--bg); border: 1px solid #ffffff12; box-shadow: 0 24px 60px -20px #000000, 0 0 0 1px #ffffff08 inset; }
+  .titlebar { display: flex; align-items: center; gap: 0.55rem; padding: 0.7rem 0.95rem; background: var(--bg-dark); border-bottom: 1px solid #ffffff0d; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #F92772; } .dot.y { background: #E6DA74; } .dot.g { background: #A7E22E; }
+  .titlebar .file { margin-left: 0.6rem; font-family: var(--mono); font-size: 0.78rem; color: var(--gray); }
+  .titlebar .file b { color: var(--fg); font-weight: 500; }
+  .editor { display: grid; grid-template-columns: 3.2rem 1fr; font-family: var(--mono); font-size: 0.84rem; line-height: 1.72; overflow-x: auto; }
+  .gutter { text-align: right; padding: 1.1rem 0.85rem 1.35rem; color: #ffffff2e; user-select: none; font-variant-numeric: tabular-nums; background: linear-gradient(90deg, #ffffff05, transparent); white-space: pre; }
+  pre.code { margin: 0; padding: 1.1rem 1.4rem 1.35rem 0.4rem; white-space: pre; tab-size: 2; }
+  .cmt { color: var(--comment); } .kw { color: var(--pink); } .type { color: var(--cyan); font-style: italic; }
+  .fn { color: var(--green); } .str { color: var(--yellow); } .num { color: var(--purple); }
+  .const { color: var(--purple); font-style: italic; } .op { color: var(--pink); }
+  .exc { color: var(--error); font-style: italic; } .test { color: var(--amber); }
+  .builtin { color: var(--cyan); font-style: italic; } .java { color: var(--orange); }
+  .pipe { color: var(--accent); font-weight: 700; }
+  .section-label { margin: 1.9rem 0 0.2rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--comment); }
+  .legend { margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0.55rem; }
+  .swatch { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.7rem; background: var(--panel); border: 1px solid #ffffff0d; border-radius: 8px; }
+  .chip { width: 20px; height: 20px; border-radius: 5px; flex: none; box-shadow: 0 0 12px -2px currentColor; }
+  .swatch .meta { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+  .swatch .role { font-size: 0.72rem; color: var(--fg); font-weight: 600; }
+  .swatch .hex { font-family: var(--mono); font-size: 0.68rem; color: var(--comment); letter-spacing: 0.03em; }
+</style>
+
+<div class="shell">
+  <header class="masthead">
+    <h1>RealCoder · NeoObjectPascal</h1>
+    <span class="tag">cláusulas coloridas por escopo</span>
+  </header>
+
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="file">src/<b>app.npas</b></span>
+    </div>
+    <div class="editor">
+      <div class="gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</div><pre class="code"><span class="cmt">// NeoObjectPascal — RealCoder theme</span>
+<span class="kw">uses</span> <span class="builtin">System.Utils</span>, <span class="builtin">Data.JSON</span>, <span class="builtin">Data.Http</span>;
+
+<span class="kw">type</span>
+  <span class="type">TUser</span> = <span class="kw">class</span>
+    <span class="fn">Name</span>: <span class="type">String</span>;
+    <span class="kw">procedure</span> <span class="fn">Greet</span>();
+  <span class="kw">end</span>;
+
+<span class="kw">function</span> <span class="fn">Transform</span>(<span class="param">x</span>: <span class="type">Real</span>): <span class="type">Real</span>
+<span class="kw">begin</span>
+  <span class="kw">var</span> resultado: <span class="type">Real</span>;
+  resultado <span class="op">:=</span> x <span class="pipe">|&gt;</span> <span class="fn">Double</span> <span class="pipe">|&gt;</span> <span class="fn">Increment</span>;  <span class="cmt">// pipe operator</span>
+  <span class="kw">return</span> resultado;
+<span class="kw">end</span>;
+
+<span class="kw">procedure</span> <span class="fn">Risky</span>()
+<span class="kw">begin</span>
+  <span class="exc">try</span>
+    <span class="exc">raise</span> <span class="type">Exception</span>.<span class="fn">Create</span>(<span class="str">'boom'</span>);
+  <span class="exc">catch</span> (<span class="param">E</span>: <span class="type">Exception</span>)
+    <span class="builtin">WriteLn</span>(<span class="str">'Caught: '</span>, E.<span class="fn">Message</span>);
+  <span class="exc">finally</span>
+    <span class="builtin">WriteLn</span>(<span class="str">'done'</span>);
+  <span class="exc">end</span>;
+<span class="kw">end</span>;
+
+<span class="test">test</span> <span class="str">'sums two numbers'</span>
+<span class="kw">begin</span>
+  <span class="test">expect</span>(<span class="fn">somar</span>(<span class="num">2</span>, <span class="num">3</span>)).<span class="test">toEqual</span>(<span class="num">5</span>);
+  <span class="test">verify</span>(<span class="test">mock</span>).<span class="test">wasCalled</span>();
+<span class="kw">end</span>;
+
+<span class="kw">begin</span>
+  <span class="kw">var</span> nome: <span class="type">String</span>;  nome <span class="op">:=</span> <span class="str">'World'</span>;
+  <span class="builtin">WriteLn</span>(<span class="str">'Hello, '</span>, nome);
+  nome <span class="op">:=</span> <span class="java">java</span>: (nome) { <span class="cmt">/* JVM */</span> <span class="kw">return</span> nome.toUpperCase(); };
+  <span class="kw">if</span> ativo = <span class="const">true</span> <span class="kw">then</span> <span class="builtin">Json</span>.<span class="fn">Parse</span>(<span class="str">'{"ok": true}'</span>);
+<span class="kw">end</span>.</pre>
+    </div>
+  </div>
+
+  <p class="section-label">Cláusulas NeoObjectPascal — cores por escopo</p>
+  <div class="legend">
+    <div class="swatch"><span class="chip" style="background:#FF3D9A;color:#FF3D9A"></span><span class="meta"><span class="role">Pipe |&gt;</span><span class="hex">#FF3D9A</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#FF2E5B;color:#FF2E5B"></span><span class="meta"><span class="role">Exceções (try/catch/raise)</span><span class="hex">#FF2E5B · itálico</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#FFCA3A;color:#FFCA3A"></span><span class="meta"><span class="role">Testes (test/expect/mock)</span><span class="hex">#FFCA3A</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#66D9EE;color:#66D9EE"></span><span class="meta"><span class="role">Built-ins & módulos</span><span class="hex">#66D9EE · itálico</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#FE9720;color:#FE9720"></span><span class="meta"><span class="role">Java embutido</span><span class="hex">#FE9720</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#F92772;color:#F92772"></span><span class="meta"><span class="role">Keywords / OO / storage</span><span class="hex">#F92772</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#66D9EE;color:#66D9EE"></span><span class="meta"><span class="role">Tipos / classes</span><span class="hex">#66D9EE · itálico</span></span></div>
+    <div class="swatch"><span class="chip" style="background:#AE81FF;color:#AE81FF"></span><span class="meta"><span class="role">Constantes / números</span><span class="hex">#AE81FF</span></span></div>
+  </div>
+</div>

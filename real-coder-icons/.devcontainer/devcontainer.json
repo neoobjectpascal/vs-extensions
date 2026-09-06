@@ -1,0 +1,35 @@
+{
+  "name": "vscode-realcoder-icons",
+
+  // Use Microsoft's Ubuntu Base image for the dev container
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "24"
+    }
+  },
+
+  "privileged": true,
+
+  "onCreateCommand": {
+    // Install dependencies in the dev container
+    "install-packages": "npm ci"
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Define suggested settings for the dev container
+        "resmon.show.battery": false,
+        "resmon.show.cpufreq": false
+      },
+      "extensions": [
+        "biomejs.biome",
+        "jock.svg",
+        "editorconfig.editorconfig",
+        "davidanson.vscode-markdownlint",
+        "huntertran.auto-markdown-toc"
+      ]
+    }
+  }
+}
